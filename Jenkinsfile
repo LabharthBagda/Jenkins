@@ -9,7 +9,11 @@ pipeline {
         }
         stage('List Files') {
             steps {
-                bat 'dir'  // For Windows
+                script {
+                    // List files and directories in the workspace
+                    def files = bat(script: 'dir', returnStdout: true)
+                    echo "Files in the workspace:\n${files}"
+                }
             }
         }
         stage('Build') {
